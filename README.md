@@ -24,9 +24,9 @@ VMware Workstation Pro
 | Interface | Role | Network | IP/Subnet | Description |
 |------------|------|----------|------------|--------------|
 | `em0` | WAN | NAT | DHCP | Internet access via host |
-| `em1` | LAN | 192.168.1.0/24 | Gateway: 192.168.1.1 | Internal office LAN |
+| `em1` | LAN | 192.168.1.0/24 | Gateway: 192.168.1.1 | General office LAN |
 | `em2` | Finance | 192.168.10.0/24 | Gateway: 192.168.10.1 | Finance subnet |
-| `em3` | OPT2 | 192.168.20.0/24 | Gateway: 192.168.20.1 | Optional test subnet |
+| `em3` | OPT2 | 192.168.20.0/24 | Gateway: 192.168.20.1 | Optional testing subnet |
 
 ---
 
@@ -39,80 +39,77 @@ VMware Workstation Pro
   → Beginning the installation process for OPNsense in VMware.
 
 - ![Installation Complete](images/02-opnsense-install-complete.png)  
-  → Installation finished successfully, ready for initial login.
+  → Installation completed successfully; ready for initial login.
 
 ---
 
 ### 🌐 Step 2: Interface Assignments
-**Goal:** Assign each network interface (WAN, LAN, Finance, OPT2) to its corresponding VMnet network.
+**Goal:** Assign each OPNsense interface (WAN, LAN, Finance, OPT2) to its respective VMnet network.
 
 - ![Interface Assignments](images/03-interface-assignments.png)  
-  → Mapping each OPNsense adapter to a VMnet. Each VMnet simulates a separate physical network.
+  → Mapping each virtual adapter to a VMware network. Each VMnet simulates a separate physical segment.
 
 - ![Set Interface IPs](images/04-set-interface-ips.png)  
-  → Defining IP addresses for LAN and Finance networks inside OPNsense.
+  → Assigning static IPs for LAN, Finance, and optional interfaces inside OPNsense.
 
 - ![Assign Interfaces in Console](images/05-assign-interfaces.png)  
-  → Confirming all interfaces are correctly linked and recognized by OPNsense.
+  → Confirming that each interface is correctly identified and configured.
 
 ---
 
 ### 🧮 Step 3: DHCP and Network Configuration
-**Goal:** Enable and configure DHCP for the LAN and Finance networks so Ubuntu clients can automatically receive IPs.
+**Goal:** Enable and configure DHCP for LAN and Finance networks so clients automatically receive IP addresses.
 
 - ![DHCP Configuration](images/06-dhcp-config.png)  
-  → Enabling the DHCP server on the Finance interface with proper range.
+  → Enabling DHCP service on both LAN and Finance interfaces.
 
 - ![OPNsense Services View](images/07-opnsense-services.png)  
-  → Viewing running services (DHCP, DNS Resolver, etc.) to confirm functionality.
+  → Verifying that DHCP and DNS services are running properly.
 
 - ![Finance DHCP Range](images/08-dhcp-finance-range.png)  
-  → Setting DHCP range for Finance subnet (e.g., 192.168.10.100–192.168.10.200).
+  → Defining the Finance DHCP pool (192.168.10.100–192.168.10.200).
 
 - ![Final Interface Config](images/09-final-interface-config.png)  
   → Reviewing all interface IPs and DHCP settings before applying.
 
 ---
 
-### 🧭 Step 4: Initial Web GUI Configuration
-**Goal:** Access OPNsense via web GUI (https://192.168.1.1) and complete the setup wizard.
+### 🧭 Step 4: Web GUI Configuration
+**Goal:** Access OPNsense via the web interface (https://192.168.1.1) and complete setup wizard.
 
 - ![Wizard Welcome](images/10-wizard-welcome.png)  
-  → Starting the configuration wizard via the browser.
+  → Starting the OPNsense setup wizard in the browser.
 
 - ![Wizard Finish](images/11-wizard-finish.png)  
-  → Finishing setup and applying configuration defaults.
+  → Completing setup and applying configuration defaults.
 
 - ![OPNsense Dashboard](images/12-dashboard.png)  
-  → The main OPNsense dashboard showing interface statistics, gateway status, and live traffic graphs.
+  → The dashboard confirms active interfaces, gateways, and services.
 
 ---
 
 ### 🔥 Step 5: Firewall Rules and Connectivity Testing
-**Goal:** Apply firewall rules to restrict/allow traffic between subnets and verify connectivity.
+**Goal:** Apply firewall rules to restrict or allow traffic between subnets and confirm proper routing.
 
 - ![Firewall Rule for Finance](images/13-firewall-rule-finance.png)  
-  → Configuring rules on the Finance interface to control access to the LAN and internet.
-
-- ![Finance No Internet Access](images/14-finance-no-internet.png)  
-  → Verifying isolation — Finance subnet cannot reach the internet until rule modification.
+  → Creating rules to control access from Finance to LAN and WAN.
 
 ---
 
 ### 🧪 Step 6: Connectivity Verification
-**Goal:** Ensure LAN devices can access the internet, and Finance subnet isolation works as expected.
+**Goal:** Ensure LAN devices can access the internet, and inter-VLAN routing works correctly.
 
 - ![Ping Test Results](images/Screenshot%202025-11-06%20032020.png)  
-  → Successful ping to 8.8.8.8 and google.com from LAN client confirms outbound traffic works through OPNsense NAT.
+  → Successful ping to 8.8.8.8 and google.com confirms internet access through OPNsense NAT.
 
 ---
 
 ## ✅ Results
 
-- Successfully deployed a **multi-network OPNsense firewall** in a virtual lab.  
-- Verified **LAN internet access** and **Finance isolation** via firewall rules.  
-- Demonstrated how DHCP, routing, and interface separation function within OPNsense.  
-- Captured screenshots for each critical step of the process.
+- Successfully deployed a **multi-interface OPNsense firewall** in a virtualized lab.  
+- Verified **LAN internet access** and **Finance subnet routing**.  
+- Demonstrated DHCP configuration, routing, and interface separation within OPNsense.  
+- Captured screenshots for all core setup stages.
 
 ---
 
@@ -129,5 +126,3 @@ VMware Workstation Pro
 
 ## 🪪 License
 This project is licensed under the **MIT License** — free to use, modify, and share for educational purposes.
-
----
